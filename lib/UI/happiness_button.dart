@@ -17,7 +17,7 @@ class HappinessButton extends StatelessWidget{
     }
     if(happiness == ':|'){
       return InkWell(
-          child: Icon(Icons.face,
+          child: Icon(Icons.sentiment_neutral,
             size: 100.0,
             color: Colors.black)
       );
