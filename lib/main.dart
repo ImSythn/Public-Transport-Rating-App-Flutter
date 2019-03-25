@@ -65,23 +65,23 @@ class QRScanner extends StatelessWidget {
 
 class ReviewData extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _RatingButtons();
+  State<StatefulWidget> createState() => _ReviewData();
 }
 
-class _RatingButtons extends State<ReviewData> {
+class _ReviewData extends State<ReviewData> {
   List<Color> _buttonColor = [Colors.black12, Colors.black12, Colors.black12];
   List<bool> pressed = [false, false, false];
 
   TextEditingController cmessage = new TextEditingController();
   TextEditingController crating = new TextEditingController();
-  void addData(){
-
-    var url="http://localhost/se7/app%20database%20connection/adddata.php";
+  void addData() {
+    var url = "http://localhost/se7/app%20database%20connection/adddata.php";
     http.post(url, body: {
-      "message":cmessage.text,
-      "mobile":crating.text,
+      "message": cmessage.text,
+      "mobile": crating.text,
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -93,74 +93,55 @@ class _RatingButtons extends State<ReviewData> {
               icon: Icon(
                 Icons.mood_bad,
                 size: 100,
-                color: _buttonColor[0],
+                color: Colors.black12,
               ),
               onPressed: () {
-                setState(() {
-                  if (pressed[0] == false) {
-                    pressed[0] = true;
-                    pressed[1] = false;
-                    pressed[2] = false;
-                  }
-                  pressed[0] == true
-                      ? _buttonColor[0] = Colors.black
-                      : _buttonColor[0] = Colors.black12;
-                  pressed[1] == true
-                      ? _buttonColor[1] = Colors.black
-                      : _buttonColor[1] = Colors.black12;
-                  pressed[2] == true
-                      ? _buttonColor[2] = Colors.black
-                      : _buttonColor[2] = Colors.black12;
-                });
+                setState(() {});
               }),
           IconButton(
               iconSize: 100,
               icon: Icon(
                 Icons.sentiment_neutral,
                 size: 100,
-                color: _buttonColor[1],
+                color: Colors.black12,
               ),
               onPressed: () {
-                setState(() {
-                  if (pressed[1] == false) {
-                    pressed[0] = false;
-                    pressed[1] = true;
-                    pressed[2] = false;
-                  }
-                  pressed[0] == true
-                      ? _buttonColor[0] = Colors.black
-                      : _buttonColor[0] = Colors.black12;
-                  pressed[1] == true
-                      ? _buttonColor[1] = Colors.black
-                      : _buttonColor[1] = Colors.black12;
-                  pressed[2] == true
-                      ? _buttonColor[2] = Colors.black
-                      : _buttonColor[2] = Colors.black12;
-                });
+                setState(() {});
               }),
           IconButton(
               iconSize: 100,
               icon: Icon(
                 Icons.mood,
                 size: 100,
-                color: _buttonColor[2],
+                color: Colors.black12,
+              ),
+              onPressed: () {
+                setState(() {});
+              })
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          IconButton(
+              iconSize: 25,
+              icon: Icon(
+                Icons.send,
+                size: 25,
               ),
               onPressed: () {
                 setState(() {
-                  if (pressed[2] == false) {
-                    pressed[0] = false;
-                    pressed[1] = false;
-                    pressed[2] = true;
-                  }
-                  pressed[0] == true
-                      ? _buttonColor[0] = Colors.black
-                      : _buttonColor[0] = Colors.black12;
-                  pressed[1] == true
-                      ? _buttonColor[1] = Colors.black
-                      : _buttonColor[1] = Colors.black12;
-                  pressed[2] == true
-                      ? _buttonColor[2] = Colors.black
-                      : _buttonColor[2] = Colors.black12;
+                  addData();
+                });
+              }),
+          IconButton(
+              iconSize: 25,
+              icon: Icon(
+                Icons.camera_alt,
+                size: 25,
+              ),
+              onPressed: () {
+                setState(() {
+                  
                 });
               })
         ],
