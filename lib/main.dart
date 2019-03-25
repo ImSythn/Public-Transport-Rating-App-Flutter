@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+//import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+//import 'dart:convert';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 void main() =>
     runApp(HomePage()); //=> Shortcut for running one single line of code.
@@ -146,7 +148,50 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
+      Row(
+        children: <Widget>[
+          IconButton(
+              iconSize: 25,
+              icon: Icon(
+                Icons.send,
+                size: 25,
+              ),
+              onPressed: () {
+                setState(() {
+                  addData();
+                });
+              }),
+          CameraPicker()
+        ],
+      ),
       TextField(),
     ]);
   }
 }
+
+class CameraPicker extends StatefulWidget {
+  @override
+  _CameraPicker createState() => _CameraPicker();
+}
+
+class _CameraPicker extends State<CameraPicker> {
+  File image;
+  picker() async {
+    File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    if (img != null) {
+      image = img;
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        Icons.camera_alt,
+      ),
+      onPressed: picker,
+    );
+  }
+}
+  
