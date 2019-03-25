@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'dart:async';
 import 'package:http/http.dart' as http;
-//import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-void main() =>
-    runApp(HomePage()); //=> Shortcut for running one single line of code.
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    )); //=> Shortcut for running one single line of code.
 
 class HomePage extends StatelessWidget {
   @override
@@ -72,67 +72,22 @@ class ReviewData extends StatefulWidget {
 
 class _ReviewData extends State<ReviewData> {
   TextEditingController cmessage = new TextEditingController();
-  TextEditingController crating = new TextEditingController();
+  TextEditingController crating = new TextEditingController(text: '1');
+  int rating = 1;
   void addData() {
-    var url = "http://localhost/se7/app%20database%20connection/adddata.php";
-    http.post(url, body: {
-      "message": cmessage.text,
-      "mobile": crating.text,
-    });
+    var url =
+        "http://192.168.178.73/se7/app%20database%20connection/adddata.php";
+    http.post(url,
+        body: {"message": cmessage.text, "rating": rating.toString()});
   }
 
-  IconButton buttonBad() {
-    return IconButton(
-        iconSize: 100,
-        icon: Icon(
-          Icons.mood_bad,
-          size: 100,
-          color: Colors.black12,
-        ),
-        onPressed: () {
-          setState(() {
-            crating.text = '1';
-            updateButtons();
-          });
-        });
-  }
-
-  IconButton buttonNeutral() {
-    return IconButton(
-        iconSize: 100,
-        icon: Icon(
-          Icons.sentiment_neutral,
-          size: 100,
-          color: Colors.black12,
-        ),
-        onPressed: () {
-          setState(() {
-            crating.text = '2';
-            updateButtons();
-          });
-        });
-  }
-
-  IconButton buttonGood() {
-    return IconButton(
-        iconSize: 100,
-        icon: Icon(
-          Icons.mood,
-          size: 100,
-          color: Colors.black12,
-        ),
-        onPressed: () {
-          setState(() {
-            crating.text = '3';
-            updateButtons();
-          });
-        });
-  }
+  List<Color> buttonColor = [Colors.black12, Colors.black, Colors.black12];
 
   void updateButtons() {
-    if (crating.text == '1') {}
-    if (crating.text == '2') {}
-    if (crating.text == '3') {}
+    buttonColor[0] = Colors.black12;
+    buttonColor[1] = Colors.black12;
+    buttonColor[2] = Colors.black12;
+    buttonColor[rating] = Colors.black;
   }
 
   @override
@@ -140,10 +95,52 @@ class _ReviewData extends State<ReviewData> {
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[buttonBad(), buttonNeutral(), buttonGood()],
+        children: <Widget>[
+          IconButton(
+              iconSize: 100,
+              icon: Icon(
+                Icons.mood_bad,
+                size: 100,
+                color: buttonColor[0],
+              ),
+              onPressed: () {
+                setState(() {
+                  rating = 0;
+                  updateButtons();
+                });
+              }),
+          IconButton(
+              iconSize: 100,
+              icon: Icon(
+                Icons.sentiment_neutral,
+                size: 100,
+                color: buttonColor[1],
+              ),
+              onPressed: () {
+                setState(() {
+                  rating = 1;
+                  updateButtons();
+                });
+              }),
+          IconButton(
+              iconSize: 100,
+              icon: Icon(
+                Icons.mood,
+                size: 100,
+                color: buttonColor[2],
+              ),
+              onPressed: () {
+                setState(() {
+                  rating = 2;
+                  updateButtons();
+                });
+              })
+        ],
       ),
       Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          CameraPicker(),
           IconButton(
               iconSize: 25,
               icon: Icon(
@@ -151,14 +148,14 @@ class _ReviewData extends State<ReviewData> {
                 size: 25,
               ),
               onPressed: () {
-                setState(() {
-                  addData();
-                });
-              }),
-              CameraPicker()
+                addData();
+              })
         ],
       ),
-      TextField(),
+      TextField(
+        controller: cmessage,
+        decoration: InputDecoration(hintText: "Type a message"),
+      ),
     ]);
   }
 }
@@ -188,4 +185,3 @@ class _CameraPicker extends State<CameraPicker> {
     );
   }
 }
-  
