@@ -164,10 +164,10 @@ class _MessageField extends State<MessageField> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         IconButton(
-          iconSize: 100,
+          iconSize: 30,
           icon: Icon(Icons.camera_alt),
         )
       ]
