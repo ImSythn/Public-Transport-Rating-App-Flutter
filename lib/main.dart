@@ -71,9 +71,6 @@ class ReviewData extends StatefulWidget {
 }
 
 class _ReviewData extends State<ReviewData> {
-  List<Color> _buttonColor = [Colors.black12, Colors.black12, Colors.black12];
-  List<bool> pressed = [false, false, false];
-
   TextEditingController cmessage = new TextEditingController();
   TextEditingController crating = new TextEditingController();
   void addData() {
@@ -84,43 +81,66 @@ class _ReviewData extends State<ReviewData> {
     });
   }
 
+  IconButton buttonBad() {
+    return IconButton(
+        iconSize: 100,
+        icon: Icon(
+          Icons.mood_bad,
+          size: 100,
+          color: Colors.black12,
+        ),
+        onPressed: () {
+          setState(() {
+            crating.text = '1';
+            updateButtons();
+          });
+        });
+  }
+
+  IconButton buttonNeutral() {
+    return IconButton(
+        iconSize: 100,
+        icon: Icon(
+          Icons.sentiment_neutral,
+          size: 100,
+          color: Colors.black12,
+        ),
+        onPressed: () {
+          setState(() {
+            crating.text = '2';
+            updateButtons();
+          });
+        });
+  }
+
+  IconButton buttonGood() {
+    return IconButton(
+        iconSize: 100,
+        icon: Icon(
+          Icons.mood,
+          size: 100,
+          color: Colors.black12,
+        ),
+        onPressed: () {
+          setState(() {
+            crating.text = '3';
+            updateButtons();
+          });
+        });
+  }
+
+  void updateButtons() {
+    if (crating.text == '1') {}
+    if (crating.text == '2') {}
+    if (crating.text == '3') {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          IconButton(
-              iconSize: 100,
-              icon: Icon(
-                Icons.mood_bad,
-                size: 100,
-                color: Colors.black12,
-              ),
-              onPressed: () {
-                setState(() {});
-              }),
-          IconButton(
-              iconSize: 100,
-              icon: Icon(
-                Icons.sentiment_neutral,
-                size: 100,
-                color: Colors.black12,
-              ),
-              onPressed: () {
-                setState(() {});
-              }),
-          IconButton(
-              iconSize: 100,
-              icon: Icon(
-                Icons.mood,
-                size: 100,
-                color: Colors.black12,
-              ),
-              onPressed: () {
-                setState(() {});
-              })
-        ],
+        children: <Widget>[buttonBad(), buttonNeutral(), buttonGood()],
       ),
       Row(
         children: <Widget>[
@@ -135,33 +155,7 @@ class _ReviewData extends State<ReviewData> {
                   addData();
                 });
               }),
-          IconButton(
-              iconSize: 25,
-              icon: Icon(
-                Icons.camera_alt,
-                size: 25,
-              ),
-              onPressed: () {
-                setState(() {
-                  
-                });
-              })
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          IconButton(
-              iconSize: 25,
-              icon: Icon(
-                Icons.send,
-                size: 25,
-              ),
-              onPressed: () {
-                setState(() {
-                  addData();
-                });
-              }),
-          CameraPicker()
+              CameraPicker()
         ],
       ),
       TextField(),
