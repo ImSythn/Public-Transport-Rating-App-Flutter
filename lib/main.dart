@@ -75,8 +75,7 @@ class _ReviewData extends State<ReviewData> {
   TextEditingController crating = new TextEditingController(text: '1');
   int rating = 1;
   void addData() {
-    var url =
-        "http://192.168.178.73/se7/app%20database%20connection/adddata.php";
+    var url ="http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url,
         body: {"message": cmessage.text, "rating": rating.toString()});
   }
