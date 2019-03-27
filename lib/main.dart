@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'dart:async';
 import 'package:http/http.dart' as http;
-//import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-void main() =>
-    runApp(HomePage()); //=> Shortcut for running one single line of code.
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    )); //=> Shortcut for running one single line of code.
 
 class HomePage extends StatelessWidget {
   @override
@@ -71,17 +71,22 @@ class ReviewData extends StatefulWidget {
 }
 
 class _ReviewData extends State<ReviewData> {
-  List<Color> _buttonColor = [Colors.black12, Colors.black12, Colors.black12];
-  List<bool> pressed = [false, false, false];
-
   TextEditingController cmessage = new TextEditingController();
-  TextEditingController crating = new TextEditingController();
+  TextEditingController crating = new TextEditingController(text: '1');
+  int rating = 1;
   void addData() {
-    var url = "http://localhost/se7/app%20database%20connection/adddata.php";
-    http.post(url, body: {
-      "message": cmessage.text,
-      "mobile": crating.text,
-    });
+    var url ="http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
+    http.post(url,
+        body: {"message": cmessage.text, "rating": rating.toString()});
+  }
+
+  List<Color> buttonColor = [Colors.black12, Colors.black, Colors.black12];
+
+  void updateButtons() {
+    buttonColor[0] = Colors.black12;
+    buttonColor[1] = Colors.black12;
+    buttonColor[2] = Colors.black12;
+    buttonColor[rating] = Colors.black;
   }
 
   @override
@@ -95,24 +100,12 @@ class _ReviewData extends State<ReviewData> {
               icon: Icon(
                 Icons.mood_bad,
                 size: 100,
-                color: _buttonColor[0],
+                color: buttonColor[0],
               ),
               onPressed: () {
                 setState(() {
-                  if (pressed[0] == false) {
-                    pressed[0] = true;
-                    pressed[1] = false;
-                    pressed[2] = false;
-                  }
-                  pressed[0] == true
-                      ? _buttonColor[0] = Colors.black
-                      : _buttonColor[0] = Colors.black12;
-                  pressed[1] == true
-                      ? _buttonColor[1] = Colors.black
-                      : _buttonColor[1] = Colors.black12;
-                  pressed[2] == true
-                      ? _buttonColor[2] = Colors.black
-                      : _buttonColor[2] = Colors.black12;
+                  rating = 0;
+                  updateButtons();
                 });
               }),
           IconButton(
@@ -120,24 +113,12 @@ class _ReviewData extends State<ReviewData> {
               icon: Icon(
                 Icons.sentiment_neutral,
                 size: 100,
-                color: _buttonColor[1],
+                color: buttonColor[1],
               ),
               onPressed: () {
                 setState(() {
-                  if (pressed[1] == false) {
-                    pressed[0] = false;
-                    pressed[1] = true;
-                    pressed[2] = false;
-                  }
-                  pressed[0] == true
-                      ? _buttonColor[0] = Colors.black
-                      : _buttonColor[0] = Colors.black12;
-                  pressed[1] == true
-                      ? _buttonColor[1] = Colors.black
-                      : _buttonColor[1] = Colors.black12;
-                  pressed[2] == true
-                      ? _buttonColor[2] = Colors.black
-                      : _buttonColor[2] = Colors.black12;
+                  rating = 1;
+                  updateButtons();
                 });
               }),
           IconButton(
@@ -145,29 +126,18 @@ class _ReviewData extends State<ReviewData> {
               icon: Icon(
                 Icons.mood,
                 size: 100,
-                color: _buttonColor[2],
+                color: buttonColor[2],
               ),
               onPressed: () {
                 setState(() {
-                  if (pressed[2] == false) {
-                    pressed[0] = false;
-                    pressed[1] = false;
-                    pressed[2] = true;
-                  }
-                  pressed[0] == true
-                      ? _buttonColor[0] = Colors.black
-                      : _buttonColor[0] = Colors.black12;
-                  pressed[1] == true
-                      ? _buttonColor[1] = Colors.black
-                      : _buttonColor[1] = Colors.black12;
-                  pressed[2] == true
-                      ? _buttonColor[2] = Colors.black
-                      : _buttonColor[2] = Colors.black12;
+                  rating = 2;
+                  updateButtons();
                 });
               })
         ],
       ),
       Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           CameraPicker(),
           IconButton(
@@ -177,13 +147,20 @@ class _ReviewData extends State<ReviewData> {
                 size: 25,
               ),
               onPressed: () {
+<<<<<<< HEAD
                 setState(() {
                   addData();
                 });
+=======
+                addData();
+>>>>>>> d27cc0c332db880e602822c798fcbdf2ba56c251
               })
         ],
       ),
-      TextField(),
+      TextField(
+        controller: cmessage,
+        decoration: InputDecoration(hintText: "Type a message"),
+      ),
     ]);
   }
 }
