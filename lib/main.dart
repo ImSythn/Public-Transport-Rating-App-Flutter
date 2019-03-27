@@ -169,6 +169,7 @@ class _ReviewData extends State<ReviewData> {
       ),
       Row(
         children: <Widget>[
+          CameraPicker(),
           IconButton(
               iconSize: 25,
               icon: Icon(
@@ -179,8 +180,7 @@ class _ReviewData extends State<ReviewData> {
                 setState(() {
                   addData();
                 });
-              }),
-          CameraPicker()
+              })
         ],
       ),
       TextField(),
@@ -213,4 +213,3 @@ class _CameraPicker extends State<CameraPicker> {
     );
   }
 }
-  
