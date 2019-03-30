@@ -77,12 +77,21 @@ class _ReviewData extends State<ReviewData> {
   TextEditingController crating = new TextEditingController(text: '1');
   int rating = 1;
   void addData() {
+<<<<<<< HEAD
     var url ="http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
       "vehicle_id": cvehicleid.text,
       "img_path": img_path
+=======
+    var url =
+        "http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
+    http.post(url, body: {
+      "message": cmessage.text,
+      "rating": rating.toString(),
+      "vehicle_id": cvehicleid.text
+>>>>>>> fcbaf5bbb728c311e3482d6939d9a7d1be3d34e6
     });
   }
 
