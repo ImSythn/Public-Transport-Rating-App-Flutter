@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -22,7 +24,7 @@ class HomePage extends StatelessWidget {
               VehicleID(),
               SizedBox(height: 70),
               QRScanner(),
-              SizedBox(height: 70),
+              SizedBox(height: 86),
               ReviewData()
             ],
           ),
@@ -47,7 +49,6 @@ class _VehicleIDState extends State<VehicleID> {
           size: 200,
           color: Colors.lightBlue,
         ),
-        Text('Vehicle ID: ')
       ],
     );
   }
@@ -72,12 +73,17 @@ class ReviewData extends StatefulWidget {
 
 class _ReviewData extends State<ReviewData> {
   TextEditingController cmessage = new TextEditingController();
+  TextEditingController cvehicleid = new TextEditingController();
   TextEditingController crating = new TextEditingController(text: '1');
   int rating = 1;
   void addData() {
     var url ="http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
-    http.post(url,
-        body: {"message": cmessage.text, "rating": rating.toString()});
+    http.post(url, body: {
+      "message": cmessage.text,
+      "rating": rating.toString(),
+      "vehicle_id": cvehicleid.text,
+      "img_path": img_path
+    });
   }
 
   List<Color> buttonColor = [Colors.black12, Colors.black, Colors.black12];
@@ -136,9 +142,17 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
+      SizedBox(height: 15),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          Container(
+              width: 100,
+              child: TextField(
+                controller: cvehicleid,
+                decoration: InputDecoration(hintText: "Vehicle ID"),
+                keyboardType: TextInputType.number,
+              )),
           CameraPicker(),
           IconButton(
               iconSize: 25,
@@ -147,13 +161,7 @@ class _ReviewData extends State<ReviewData> {
                 size: 25,
               ),
               onPressed: () {
-<<<<<<< HEAD
-                setState(() {
-                  addData();
-                });
-=======
                 addData();
->>>>>>> d27cc0c332db880e602822c798fcbdf2ba56c251
               })
         ],
       ),
@@ -170,12 +178,12 @@ class CameraPicker extends StatefulWidget {
   _CameraPicker createState() => _CameraPicker();
 }
 
+String img_path;
 class _CameraPicker extends State<CameraPicker> {
-  File image;
   picker() async {
     File img = await ImagePicker.pickImage(source: ImageSource.camera);
     if (img != null) {
-      image = img;
+      img_path = base64Encode(img.readAsBytesSync());
       setState(() {});
     }
   }
