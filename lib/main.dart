@@ -82,7 +82,7 @@ class _ReviewData extends State<ReviewData> {
       "message": cmessage.text,
       "rating": rating.toString(),
       "vehicle_id": cvehicleid.text,
-      "img_path": img_path
+      "img_path": reviewImage
     });
   }
 
@@ -173,6 +173,7 @@ class _ReviewData extends State<ReviewData> {
   }
 }
 
+String reviewImage;
 class CameraPicker extends StatefulWidget {
   @override
   _CameraPicker createState() => _CameraPicker();
@@ -183,8 +184,7 @@ class _CameraPicker extends State<CameraPicker> {
   picker() async {
     File img = await ImagePicker.pickImage(source: ImageSource.camera);
     if (img != null) {
-      img_path = base64Encode(img.readAsBytesSync());
-      setState(() {});
+      reviewImage = base64Encode(img.readAsBytesSync());
     }
   }
 
