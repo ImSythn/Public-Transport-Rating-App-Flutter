@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -80,7 +82,8 @@ class _ReviewData extends State<ReviewData> {
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
-      "vehicle_id": cvehicleid.text
+      "vehicle_id": cvehicleid.text,
+      "img_path": reviewImage
     });
   }
 
@@ -159,13 +162,7 @@ class _ReviewData extends State<ReviewData> {
                 size: 25,
               ),
               onPressed: () {
-<<<<<<< HEAD
-                setState(() {
-                  addData();
-                });
-=======
                 addData();
->>>>>>> d27cc0c332db880e602822c798fcbdf2ba56c251
               })
         ],
       ),
@@ -177,6 +174,7 @@ class _ReviewData extends State<ReviewData> {
   }
 }
 
+String reviewImage;
 class CameraPicker extends StatefulWidget {
   @override
   _CameraPicker createState() => _CameraPicker();
@@ -187,8 +185,7 @@ class _CameraPicker extends State<CameraPicker> {
   picker() async {
     File img = await ImagePicker.pickImage(source: ImageSource.camera);
     if (img != null) {
-      image = img;
-      setState(() {});
+      reviewImage = base64Encode(img.readAsBytesSync());
     }
   }
 
