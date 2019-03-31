@@ -79,19 +79,11 @@ class _ReviewData extends State<ReviewData> {
   int rating = 1;
   var currentLocation = <String, double>{};
   var location = new Location();
-  String error;
 
   void addData() async {
     try {
       currentLocation = await location.getLocation();
-      error = '';
-    } on PlatformException catch (e) {
-      if (e.code == 'PERMISSION_DENIED') {
-        error = 'Permission denied';
-      } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
-        error =
-            'Permission denied - please ask the user to eneable it from the app settings';
-      }
+    } on PlatformException {
       currentLocation = null;
     }
     var url =
