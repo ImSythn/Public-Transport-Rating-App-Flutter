@@ -1,9 +1,10 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:location/location.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -76,14 +77,27 @@ class _ReviewData extends State<ReviewData> {
   TextEditingController cvehicleid = new TextEditingController();
   TextEditingController crating = new TextEditingController(text: '1');
   int rating = 1;
-  void addData() {
+  var currentLocation = <String, double>{};
+  var location = new Location();
+  String error;
+
+// Platform messages may fail, so we use a try/catch PlatformException.
+
+  void addData() async {
+    try {
+      currentLocation = await location.getLocation();
+    } on PlatformException {
+      currentLocation = null;
+    }
     var url =
         "http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
       "vehicle_id": cvehicleid.text,
-      "img_path": reviewImage
+      "img_path": reviewImage,
+      "lng": currentLocation["longitude"].toString(),
+      "lat": currentLocation["latitude"].toString()
     });
   }
 
@@ -175,6 +189,7 @@ class _ReviewData extends State<ReviewData> {
 }
 
 String reviewImage;
+
 class CameraPicker extends StatefulWidget {
   @override
   _CameraPicker createState() => _CameraPicker();
