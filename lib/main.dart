@@ -81,12 +81,17 @@ class _ReviewData extends State<ReviewData> {
   var location = new Location();
   String error;
 
-// Platform messages may fail, so we use a try/catch PlatformException.
-
   void addData() async {
     try {
       currentLocation = await location.getLocation();
-    } on PlatformException {
+      error = '';
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
+        error =
+            'Permission denied - please ask the user to eneable it from the app settings';
+      }
       currentLocation = null;
     }
     var url =
@@ -188,7 +193,7 @@ class _ReviewData extends State<ReviewData> {
   }
 }
 
-String reviewImage;
+String reviewImage = '';
 
 class CameraPicker extends StatefulWidget {
   @override
