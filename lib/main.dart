@@ -12,8 +12,11 @@ void main() => runApp(MaterialApp(
     )); //=> Shortcut for running one single line of code.
 
 class HomePage extends StatelessWidget {
+  MediaQueryData queryData;
   @override
   Widget build(BuildContext context) {
+    queryData = MediaQuery.of(context);
+    double devicePixelRatio = queryData.devicePixelRatio;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -21,11 +24,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 26*devicePixelRatio ),
               VehicleID(),
-              SizedBox(height: 70),
+              SizedBox(height: 26*devicePixelRatio),
               QRScanner(),
-              SizedBox(height: 86),
+              SizedBox(height: 26*devicePixelRatio),
               ReviewData()
             ],
           ),
@@ -86,7 +89,7 @@ class _ReviewData extends State<ReviewData> {
       currentLocation = null;
     }
     var url =
-        "http://10.0.2.2/se7/app%20database%20connection/AddData.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
+        "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
