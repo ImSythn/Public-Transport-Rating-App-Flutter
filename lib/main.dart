@@ -24,11 +24,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 26*devicePixelRatio ),
+              SizedBox(height: 180/devicePixelRatio ),
               VehicleID(),
-              SizedBox(height: 26*devicePixelRatio),
+              SizedBox(height: 180/devicePixelRatio),
               QRScanner(),
-              SizedBox(height: 26*devicePixelRatio),
+              SizedBox(height: 180/devicePixelRatio),
               ReviewData()
             ],
           ),
