@@ -25,11 +25,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 26*devicePixelRatio ),
+              SizedBox(height: 26 * devicePixelRatio),
               VehicleID(),
-              SizedBox(height: 26*devicePixelRatio),
+              SizedBox(height: 26 * devicePixelRatio),
               QRScanner(),
-              SizedBox(height: 26*devicePixelRatio),
+              SizedBox(height: 26 * devicePixelRatio),
               ReviewData()
             ],
           ),
@@ -59,16 +59,33 @@ class _VehicleIDState extends State<VehicleID> {
   }
 }
 
-class QRScanner extends StatelessWidget {
-  scanQR() async {}
+class QRScanner extends StatefulWidget {
+  @override
+  _QRScanner createState() => _QRScanner();
+}
+
+class _QRScanner extends State<QRScanner> {
+  scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        cvehicleid.text = qrResult;
+      });
+    } on PlatformException {
+      cvehicleid.text = '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         IconButton(
           iconSize: 100,
-          icon: Icon(Icons.camera_alt), onPressed: scanQR(),
-        )
+          icon: Icon(Icons.camera_alt),
+          onPressed: scanQR,
+        ),
+        Text("Scan your vehicle")
       ],
     );
   }
@@ -79,9 +96,10 @@ class ReviewData extends StatefulWidget {
   State<StatefulWidget> createState() => _ReviewData();
 }
 
+TextEditingController cvehicleid = new TextEditingController(text: '');
+
 class _ReviewData extends State<ReviewData> {
   TextEditingController cmessage = new TextEditingController(text: '');
-  TextEditingController cvehicleid = new TextEditingController(text: '');
   int rating = 1;
   Map<String, double> currentLocation = <String, double>{};
   Location location = new Location();
