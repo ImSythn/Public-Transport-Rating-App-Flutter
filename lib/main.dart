@@ -1,9 +1,11 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:location/location.dart';
+import 'package:flutter/services.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -55,12 +57,15 @@ class _VehicleIDState extends State<VehicleID> {
 }
 
 class QRScanner extends StatelessWidget {
+  scanQR() async {}
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Icon(Icons.camera_alt, size: 50, color: Colors.black),
-        Text('Scan your vehicle')
+        IconButton(
+          iconSize: 100,
+          icon: Icon(Icons.camera_alt), onPressed: scanQR(),
+        )
       ],
     );
   }
@@ -76,13 +81,24 @@ class _ReviewData extends State<ReviewData> {
   TextEditingController cvehicleid = new TextEditingController();
   TextEditingController crating = new TextEditingController(text: '1');
   int rating = 1;
-  void addData() {
-    var url ="http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
+  var currentLocation = <String, double>{};
+  var location = new Location();
+
+  void addData() async {
+    try {
+      currentLocation = await location.getLocation();
+    } on PlatformException {
+      currentLocation = null;
+    }
+    var url =
+        "http://10.0.2.2/se07-dashboard/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
       "vehicle_id": cvehicleid.text,
-      "img_path": reviewImage
+      "img_path": reviewImage,
+      "lng": currentLocation["longitude"].toString(),
+      "lat": currentLocation["latitude"].toString()
     });
   }
 
@@ -173,13 +189,15 @@ class _ReviewData extends State<ReviewData> {
   }
 }
 
-String reviewImage;
+String reviewImage = '';
+
 class CameraPicker extends StatefulWidget {
   @override
   _CameraPicker createState() => _CameraPicker();
 }
 
 String img_path;
+
 class _CameraPicker extends State<CameraPicker> {
   picker() async {
     File img = await ImagePicker.pickImage(source: ImageSource.camera);
