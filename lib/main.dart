@@ -13,8 +13,11 @@ void main() => runApp(MaterialApp(
     )); //=> Shortcut for running one single line of code.
 
 class HomePage extends StatelessWidget {
+  MediaQueryData queryData;
   @override
   Widget build(BuildContext context) {
+    queryData = MediaQuery.of(context);
+    double devicePixelRatio = queryData.devicePixelRatio;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -22,11 +25,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 26*devicePixelRatio ),
               VehicleID(),
-              SizedBox(height: 70),
+              SizedBox(height: 26*devicePixelRatio),
               QRScanner(),
-              SizedBox(height: 86),
+              SizedBox(height: 26*devicePixelRatio),
               ReviewData()
             ],
           ),
@@ -77,12 +80,11 @@ class ReviewData extends StatefulWidget {
 }
 
 class _ReviewData extends State<ReviewData> {
-  TextEditingController cmessage = new TextEditingController();
-  TextEditingController cvehicleid = new TextEditingController();
-  TextEditingController crating = new TextEditingController(text: '1');
+  TextEditingController cmessage = new TextEditingController(text: '');
+  TextEditingController cvehicleid = new TextEditingController(text: '');
   int rating = 1;
-  var currentLocation = <String, double>{};
-  var location = new Location();
+  Map<String, double> currentLocation = <String, double>{};
+  Location location = new Location();
 
   void addData() async {
     try {
@@ -91,7 +93,7 @@ class _ReviewData extends State<ReviewData> {
       currentLocation = null;
     }
     var url =
-        "http://10.0.2.2/se07-dashboard/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
+        "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
