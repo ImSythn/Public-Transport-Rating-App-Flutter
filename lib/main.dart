@@ -18,11 +18,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
-    double textScaleFactor = queryData.textScaleFactor;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-            title: Text('Rate My Vehicle', textScaleFactor: textScaleFactor), backgroundColor: Colors.lightBlue),
+            title: Text('Rate My Vehicle'), backgroundColor: Colors.lightBlue),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -67,11 +66,15 @@ class QRScanner extends StatelessWidget {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
-    double textScaleFactor = queryData.textScaleFactor;
     return Column(
       children: <Widget>[
         Icon(Icons.camera_alt, size: 175/devicePixelRatio, color: Colors.black),
-        Text('Scan your vehicle', textScaleFactor: textScaleFactor)
+        SizedBox(
+          height: 40/devicePixelRatio,
+          child: FittedBox(
+            child:  Text('Scan your vehicle',)
+          )
+        )
       ],
     );
   }
@@ -120,7 +123,6 @@ class _ReviewData extends State<ReviewData> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
-    double textScaleFactor = queryData.textScaleFactor;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
