@@ -159,10 +159,10 @@ class _ReviewData extends State<ReviewData> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-              iconSize: 60 * scale,
+              iconSize: 70 * scale,
               icon: Icon(
                 Icons.mood_bad,
-                size: 60 * scale,
+                size: 70 * scale,
                 color: buttonColor[0],
               ),
               onPressed: () {
@@ -172,10 +172,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 60 * scale,
+              iconSize: 70 * scale,
               icon: Icon(
                 Icons.sentiment_neutral,
-                size: 60 * scale,
+                size: 70 * scale,
                 color: buttonColor[1],
               ),
               onPressed: () {
@@ -185,10 +185,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 60 * scale,
+              iconSize: 70 * scale,
               icon: Icon(
                 Icons.mood,
-                size: 60 * scale,
+                size: 70 * scale,
                 color: buttonColor[2],
               ),
               onPressed: () {
@@ -199,7 +199,7 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 30),
+      SizedBox(height: 30*scale-(30/scale)),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
