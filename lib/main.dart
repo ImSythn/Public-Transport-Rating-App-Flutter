@@ -227,6 +227,12 @@ class _ReviewData extends State<ReviewData> {
                 addData();
                 Dialog dialogs = new Dialog();
                 dialogs.information(context, "Thank you for your review!");
+                cmessage.text = '';
+                cvehicleid.text = '';
+                setState(() {
+                  rating = 1;
+                  updateButtons();
+                });
               })
         ],
       ),
