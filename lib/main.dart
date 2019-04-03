@@ -19,8 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = (MediaQuery.of(context).size.height * MediaQuery.of(context).size.height) /
-        (MediaQuery.of(context).size.width * MediaQuery.of(context).size.width);
+    double scale = MediaQuery.of(context).size.height/500;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -30,11 +29,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50 / scale),
+              SizedBox(height: 15 * scale),
               VehicleID(),
-              SizedBox(height: 50 / scale),
+              SizedBox(height: 15 * scale),
               QRScanner(),
-              SizedBox(height: 50 / scale),
+              SizedBox(height: 30 * scale),
               ReviewData()
             ],
           ),
@@ -53,13 +52,12 @@ class _VehicleIDState extends State<VehicleID> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = (MediaQuery.of(context).size.height * MediaQuery.of(context).size.height) /
-        (MediaQuery.of(context).size.width * MediaQuery.of(context).size.width);
+    double scale = MediaQuery.of(context).size.height/500;
     return Column(
       children: <Widget>[
         Icon(
           Icons.train,
-          size: 150 / scale,
+          size: 150 * scale,
           color: Colors.lightBlue,
         ),
       ],
@@ -93,17 +91,16 @@ class _QRScanner extends State<QRScanner> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = (MediaQuery.of(context).size.height * MediaQuery.of(context).size.height) /
-        (MediaQuery.of(context).size.width * MediaQuery.of(context).size.width);
+    double scale = MediaQuery.of(context).size.height/500;
     return Column(
       children: <Widget>[
         IconButton(
-          iconSize: 75 / scale,
+          iconSize: 50 * scale,
           icon: Icon(Icons.center_focus_weak),
           onPressed: scanQR,
         ),
         SizedBox(
-            height: 15 / scale,
+            height: 10 * scale,
             child: FittedBox(
                 child: Text(
               'Scan vehicle QR-code',
@@ -156,17 +153,16 @@ class _ReviewData extends State<ReviewData> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = (MediaQuery.of(context).size.height * MediaQuery.of(context).size.height) /
-        (MediaQuery.of(context).size.width * MediaQuery.of(context).size.width);
+    double scale = MediaQuery.of(context).size.height/500;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-              iconSize: 100 / scale,
+              iconSize: 75 * scale,
               icon: Icon(
                 Icons.mood_bad,
-                size: 100 / scale,
+                size: 75 * scale,
                 color: buttonColor[0],
               ),
               onPressed: () {
@@ -176,10 +172,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 100 / scale,
+              iconSize: 75 * scale,
               icon: Icon(
                 Icons.sentiment_neutral,
-                size: 100 / scale,
+                size: 75 * scale,
                 color: buttonColor[1],
               ),
               onPressed: () {
@@ -189,10 +185,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 100 / scale,
+              iconSize: 75 * scale,
               icon: Icon(
                 Icons.mood,
-                size: 100 / scale,
+                size: 75 * scale,
                 color: buttonColor[2],
               ),
               onPressed: () {
@@ -203,12 +199,12 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 20 / scale),
+      SizedBox(height: 20 * scale),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-              width: 100 / scale,
+              width: 70 * scale,
               child: TextField(
                 controller: cvehicleid,
                 decoration: InputDecoration(hintText: "Vehicle ID"),
@@ -216,10 +212,10 @@ class _ReviewData extends State<ReviewData> {
               )),
           CameraPicker(),
           IconButton(
-              iconSize: 25 / scale,
+              iconSize: 15 * scale,
               icon: Icon(
                 Icons.send,
-                size: 25 / scale,
+                size: 15 * scale,
               ),
               onPressed: () {
                 addData();
@@ -252,13 +248,12 @@ class _CameraPicker extends State<CameraPicker> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = (MediaQuery.of(context).size.height * MediaQuery.of(context).size.height) /
-        (MediaQuery.of(context).size.width * MediaQuery.of(context).size.width);
+    double scale = MediaQuery.of(context).size.height/500;
     return IconButton(
-      iconSize: 25 / scale,
+      iconSize: 15 * scale,
       icon: Icon(
         Icons.camera_alt,
-        size: 25 / scale,
+        size: 15 * scale,
       ),
       onPressed: picker,
     );
