@@ -19,8 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = (MediaQuery.of(context).size.height * MediaQuery.of(context).size.height) /
-        (MediaQuery.of(context).size.width * MediaQuery.of(context).size.width);
+    double scale = MediaQuery.of(context).size.height/500;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
