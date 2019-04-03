@@ -19,19 +19,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double devicePixelRatio = queryData.devicePixelRatio;
+    double scale =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-            title: Text('Rate My Vehicle'), backgroundColor: Colors.lightBlue),
+          title: Text('Rate My Vehicle'),
+          backgroundColor: Colors.lightBlue,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 150 / devicePixelRatio),
+              SizedBox(height: 96 / scale),
               VehicleID(),
-              SizedBox(height: 75 / devicePixelRatio),
+              SizedBox(height: 75 / scale),
               QRScanner(),
-              SizedBox(height: 150 / devicePixelRatio),
+              SizedBox(height: 100 / scale),
               ReviewData()
             ],
           ),
@@ -50,12 +53,13 @@ class _VehicleIDState extends State<VehicleID> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double devicePixelRatio = queryData.devicePixelRatio;
+    double scale =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
         Icon(
           Icons.train,
-          size: 500 / devicePixelRatio,
+          size: 350 / scale,
           color: Colors.lightBlue,
         ),
       ],
@@ -79,9 +83,9 @@ class _QRScanner extends State<QRScanner> {
       setState(() {
         cvehicleid.text = '';
       });
-    } on FormatException{
+    } on FormatException {
       setState(() {
-       cvehicleid.text = ''; 
+        cvehicleid.text = '';
       });
     }
   }
@@ -89,16 +93,17 @@ class _QRScanner extends State<QRScanner> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double devicePixelRatio = queryData.devicePixelRatio;
+    double scale =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
         IconButton(
-          iconSize: 200 / devicePixelRatio,
+          iconSize: 150 / scale,
           icon: Icon(Icons.center_focus_weak),
           onPressed: scanQR,
         ),
         SizedBox(
-            height: 40 / devicePixelRatio,
+            height: 30 / scale,
             child: FittedBox(
                 child: Text(
               'Scan vehicle QR-code',
@@ -151,16 +156,17 @@ class _ReviewData extends State<ReviewData> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double devicePixelRatio = queryData.devicePixelRatio;
+    double scale =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-              iconSize: 300 / devicePixelRatio,
+              iconSize: 200 / scale,
               icon: Icon(
                 Icons.mood_bad,
-                size: 300 / devicePixelRatio,
+                size: 200 / scale,
                 color: buttonColor[0],
               ),
               onPressed: () {
@@ -170,10 +176,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 300 / devicePixelRatio,
+              iconSize: 200 / scale,
               icon: Icon(
                 Icons.sentiment_neutral,
-                size: 300 / devicePixelRatio,
+                size: 200 / scale,
                 color: buttonColor[1],
               ),
               onPressed: () {
@@ -183,10 +189,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 300 / devicePixelRatio,
+              iconSize: 200 / scale,
               icon: Icon(
                 Icons.mood,
-                size: 300 / devicePixelRatio,
+                size: 200 / scale,
                 color: buttonColor[2],
               ),
               onPressed: () {
@@ -197,12 +203,12 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 75 / devicePixelRatio),
+      SizedBox(height: 75 / scale),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-              width: 280 / devicePixelRatio,
+              width: 200 / scale,
               child: TextField(
                 controller: cvehicleid,
                 decoration: InputDecoration(hintText: "Vehicle ID"),
@@ -210,10 +216,10 @@ class _ReviewData extends State<ReviewData> {
               )),
           CameraPicker(),
           IconButton(
-              iconSize: 75 / devicePixelRatio,
+              iconSize: 50 / scale,
               icon: Icon(
                 Icons.send,
-                size: 75 / devicePixelRatio,
+                size: 50 / scale,
               ),
               onPressed: () {
                 addData();
@@ -235,8 +241,6 @@ class CameraPicker extends StatefulWidget {
   _CameraPicker createState() => _CameraPicker();
 }
 
-String img_path;
-
 class _CameraPicker extends State<CameraPicker> {
   picker() async {
     File img = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -248,12 +252,13 @@ class _CameraPicker extends State<CameraPicker> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double devicePixelRatio = queryData.devicePixelRatio;
+    double scale =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return IconButton(
-      iconSize: 60 / devicePixelRatio,
+      iconSize: 50 / scale,
       icon: Icon(
         Icons.camera_alt,
-        size: 60 / devicePixelRatio,
+        size: 50 / scale,
       ),
       onPressed: picker,
     );
