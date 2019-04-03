@@ -12,8 +12,9 @@ void main() => runApp(MaterialApp(
       home: HomePage(),
     )); //=> Shortcut for running one single line of code.
 
+MediaQueryData queryData; // Used to get the devicePixelRatio for scaling purpeses. 
+
 class HomePage extends StatelessWidget {
-  MediaQueryData queryData;
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
@@ -25,11 +26,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 26 * devicePixelRatio),
+              SizedBox(height: 150/devicePixelRatio ),
               VehicleID(),
-              SizedBox(height: 26 * devicePixelRatio),
+              SizedBox(height: 150/devicePixelRatio),
               QRScanner(),
-              SizedBox(height: 26 * devicePixelRatio),
+              SizedBox(height: 150/devicePixelRatio),
               ReviewData()
             ],
           ),
@@ -47,11 +48,13 @@ class VehicleID extends StatefulWidget {
 class _VehicleIDState extends State<VehicleID> {
   @override
   Widget build(BuildContext context) {
+    queryData = MediaQuery.of(context);
+    double devicePixelRatio = queryData.devicePixelRatio;
     return Column(
       children: <Widget>[
         Icon(
           Icons.train,
-          size: 200,
+          size: 500/devicePixelRatio,
           color: Colors.lightBlue,
         ),
       ],
@@ -78,6 +81,8 @@ class _QRScanner extends State<QRScanner> {
 
   @override
   Widget build(BuildContext context) {
+    queryData = MediaQuery.of(context);
+    double devicePixelRatio = queryData.devicePixelRatio;
     return Column(
       children: <Widget>[
         IconButton(
@@ -85,7 +90,12 @@ class _QRScanner extends State<QRScanner> {
           icon: Icon(Icons.camera_alt),
           onPressed: scanQR,
         ),
-        Text("Scan your vehicle")
+        SizedBox(
+          height: 40/devicePixelRatio,
+          child: FittedBox(
+            child:  Text('Scan your vehicle',)
+          )
+        )
       ],
     );
   }
@@ -133,15 +143,17 @@ class _ReviewData extends State<ReviewData> {
 
   @override
   Widget build(BuildContext context) {
+    queryData = MediaQuery.of(context);
+    double devicePixelRatio = queryData.devicePixelRatio;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-              iconSize: 100,
+              iconSize: 300/devicePixelRatio,
               icon: Icon(
                 Icons.mood_bad,
-                size: 100,
+                size: 300/devicePixelRatio,
                 color: buttonColor[0],
               ),
               onPressed: () {
@@ -151,10 +163,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 100,
+              iconSize: 300/devicePixelRatio,
               icon: Icon(
                 Icons.sentiment_neutral,
-                size: 100,
+                size: 300/devicePixelRatio,
                 color: buttonColor[1],
               ),
               onPressed: () {
@@ -164,10 +176,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 100,
+              iconSize: 300/devicePixelRatio,
               icon: Icon(
                 Icons.mood,
-                size: 100,
+                size: 300/devicePixelRatio,
                 color: buttonColor[2],
               ),
               onPressed: () {
@@ -178,12 +190,12 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 15),
+      SizedBox(height: 75/devicePixelRatio),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-              width: 100,
+              width: 280/devicePixelRatio,
               child: TextField(
                 controller: cvehicleid,
                 decoration: InputDecoration(hintText: "Vehicle ID"),
@@ -191,10 +203,10 @@ class _ReviewData extends State<ReviewData> {
               )),
           CameraPicker(),
           IconButton(
-              iconSize: 25,
+              iconSize: 75/devicePixelRatio,
               icon: Icon(
                 Icons.send,
-                size: 25,
+                size: 75/devicePixelRatio,
               ),
               onPressed: () {
                 addData();
@@ -228,9 +240,13 @@ class _CameraPicker extends State<CameraPicker> {
 
   @override
   Widget build(BuildContext context) {
+    queryData = MediaQuery.of(context);
+    double devicePixelRatio = queryData.devicePixelRatio;
     return IconButton(
+      iconSize: 75/devicePixelRatio,
       icon: Icon(
         Icons.camera_alt,
+        size: 75/devicePixelRatio,
       ),
       onPressed: picker,
     );
