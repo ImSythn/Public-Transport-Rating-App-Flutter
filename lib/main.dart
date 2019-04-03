@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale = MediaQuery.of(context).size.height /
-        (MediaQuery.of(context).size.width * 2);
+        (MediaQuery.of(context).size.width * 3);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -54,7 +54,7 @@ class _VehicleIDState extends State<VehicleID> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale = MediaQuery.of(context).size.height /
-        (MediaQuery.of(context).size.width * 2);
+        (MediaQuery.of(context).size.width * 3);
     return Column(
       children: <Widget>[
         Icon(
@@ -94,7 +94,7 @@ class _QRScanner extends State<QRScanner> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale = MediaQuery.of(context).size.height /
-        (MediaQuery.of(context).size.width * 2);
+        (MediaQuery.of(context).size.width * 3);
     return Column(
       children: <Widget>[
         IconButton(
@@ -130,7 +130,7 @@ class _ReviewData extends State<ReviewData> {
     try {
       currentLocation = await location.getLocation();
     } on PlatformException {
-      currentLocation = null;
+      currentLocation =  null;
     }
     var url =
         "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
@@ -157,7 +157,7 @@ class _ReviewData extends State<ReviewData> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale = MediaQuery.of(context).size.height /
-        (MediaQuery.of(context).size.width * 2);
+        (MediaQuery.of(context).size.width * 3);
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -253,7 +253,7 @@ class _CameraPicker extends State<CameraPicker> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale = MediaQuery.of(context).size.height /
-        (MediaQuery.of(context).size.width * 2);
+        (MediaQuery.of(context).size.width * 3);
     return IconButton(
       iconSize: 25 / scale,
       icon: Icon(
