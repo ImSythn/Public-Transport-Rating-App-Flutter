@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale =
-        MediaQuery.of(context).size.aspectRatio;
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width / MediaQuery.of(context).size.aspectRatio;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -54,7 +54,7 @@ class _VehicleIDState extends State<VehicleID> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale =
-        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width/ MediaQuery.of(context).size.aspectRatio;
     return Column(
       children: <Widget>[
         Icon(
@@ -94,7 +94,7 @@ class _QRScanner extends State<QRScanner> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale =
-        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width/ MediaQuery.of(context).size.aspectRatio;
     return Column(
       children: <Widget>[
         IconButton(
@@ -157,7 +157,7 @@ class _ReviewData extends State<ReviewData> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale =
-        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width/ MediaQuery.of(context).size.aspectRatio;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -253,7 +253,7 @@ class _CameraPicker extends State<CameraPicker> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale =
-        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width/ MediaQuery.of(context).size.aspectRatio;
     return IconButton(
       iconSize: 50 / scale,
       icon: Icon(
