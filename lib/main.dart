@@ -30,11 +30,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 96 / scale),
+              SizedBox(height: 50 / scale),
               VehicleID(),
-              SizedBox(height: 75 / scale),
+              SizedBox(height: 50 / scale),
               QRScanner(),
-              SizedBox(height: 100 / scale),
+              SizedBox(height: 50 / scale),
               ReviewData()
             ],
           ),
@@ -59,7 +59,7 @@ class _VehicleIDState extends State<VehicleID> {
       children: <Widget>[
         Icon(
           Icons.train,
-          size: 350 / scale,
+          size: 150 / scale,
           color: Colors.lightBlue,
         ),
       ],
@@ -98,12 +98,12 @@ class _QRScanner extends State<QRScanner> {
     return Column(
       children: <Widget>[
         IconButton(
-          iconSize: 150 / scale,
+          iconSize: 75 / scale,
           icon: Icon(Icons.center_focus_weak),
           onPressed: scanQR,
         ),
         SizedBox(
-            height: 30 / scale,
+            height: 15 / scale,
             child: FittedBox(
                 child: Text(
               'Scan vehicle QR-code',
@@ -163,10 +163,10 @@ class _ReviewData extends State<ReviewData> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-              iconSize: 200 / scale,
+              iconSize: 100 / scale,
               icon: Icon(
                 Icons.mood_bad,
-                size: 200 / scale,
+                size: 100 / scale,
                 color: buttonColor[0],
               ),
               onPressed: () {
@@ -176,10 +176,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 200 / scale,
+              iconSize: 100 / scale,
               icon: Icon(
                 Icons.sentiment_neutral,
-                size: 200 / scale,
+                size: 100 / scale,
                 color: buttonColor[1],
               ),
               onPressed: () {
@@ -189,10 +189,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 200 / scale,
+              iconSize: 100 / scale,
               icon: Icon(
                 Icons.mood,
-                size: 200 / scale,
+                size: 100 / scale,
                 color: buttonColor[2],
               ),
               onPressed: () {
@@ -203,12 +203,12 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 75 / scale),
+      SizedBox(height: 20 / scale),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-              width: 200 / scale,
+              width: 100 / scale,
               child: TextField(
                 controller: cvehicleid,
                 decoration: InputDecoration(hintText: "Vehicle ID"),
@@ -216,10 +216,10 @@ class _ReviewData extends State<ReviewData> {
               )),
           CameraPicker(),
           IconButton(
-              iconSize: 50 / scale,
+              iconSize: 25 / scale,
               icon: Icon(
                 Icons.send,
-                size: 50 / scale,
+                size: 25 / scale,
               ),
               onPressed: () {
                 addData();
@@ -255,10 +255,10 @@ class _CameraPicker extends State<CameraPicker> {
     double scale = MediaQuery.of(context).size.height /
         (MediaQuery.of(context).size.width * 2);
     return IconButton(
-      iconSize: 50 / scale,
+      iconSize: 25 / scale,
       icon: Icon(
         Icons.camera_alt,
-        size: 50 / scale,
+        size: 25 / scale,
       ),
       onPressed: picker,
     );
