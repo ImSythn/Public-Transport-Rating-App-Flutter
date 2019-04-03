@@ -275,10 +275,10 @@ class _CameraPicker extends State<CameraPicker> {
 }
 
 class Dialog {
-  information(BuildContext context, String title) {
+  information(BuildContext context, String title) { //Making the class like this so we can use this code for multiple types of popups
     return showDialog(
         context: context,
-        barrierDismissible: true,
+        barrierDismissible: true, //
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(title),
