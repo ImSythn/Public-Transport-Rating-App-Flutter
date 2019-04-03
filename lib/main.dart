@@ -14,15 +14,15 @@ void main() => runApp(MaterialApp(
 MediaQueryData queryData; // Used to get the devicePixelRatio for scaling purpeses. 
 
 class HomePage extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
+    double textScaleFactor = queryData.textScaleFactor;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-            title: Text('Rate My Vehicle'), backgroundColor: Colors.lightBlue),
+            title: Text('Rate My Vehicle', textScaleFactor: textScaleFactor), backgroundColor: Colors.lightBlue),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -67,10 +67,11 @@ class QRScanner extends StatelessWidget {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
+    double textScaleFactor = queryData.textScaleFactor;
     return Column(
       children: <Widget>[
         Icon(Icons.camera_alt, size: 175/devicePixelRatio, color: Colors.black),
-        Text('Scan your vehicle')
+        Text('Scan your vehicle', textScaleFactor: textScaleFactor)
       ],
     );
   }
@@ -119,6 +120,7 @@ class _ReviewData extends State<ReviewData> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
+    double textScaleFactor = queryData.textScaleFactor;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +171,7 @@ class _ReviewData extends State<ReviewData> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-              width: 250/devicePixelRatio,
+              width: 280/devicePixelRatio,
               child: TextField(
                 controller: cvehicleid,
                 decoration: InputDecoration(hintText: "Vehicle ID"),
