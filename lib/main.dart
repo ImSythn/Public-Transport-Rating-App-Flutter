@@ -159,13 +159,7 @@ class _ReviewData extends State<ReviewData> {
                 size: 25,
               ),
               onPressed: () {
-<<<<<<< HEAD
-                setState(() {
-                  addData();
-                });
-=======
                 addData();
->>>>>>> d27cc0c332db880e602822c798fcbdf2ba56c251
               })
         ],
       ),
