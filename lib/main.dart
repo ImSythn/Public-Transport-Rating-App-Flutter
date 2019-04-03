@@ -87,7 +87,7 @@ class _ReviewData extends State<ReviewData> {
       currentLocation = null;
     }
     var url =
-        "http://10.0.2.2/se7/app%20database%20connection/adddata.php"; //10.0.2.2    Special alias to your host loopback interface for android use.
+        "http://10.0.2.2/se07-dashboard/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
     http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
