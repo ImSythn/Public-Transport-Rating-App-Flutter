@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height/500;
+    double scale = MediaQuery.of(context).size.height / 500;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -29,11 +29,11 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50*scale-(50/scale)),
+              SizedBox(height: 50 * scale - (50 / scale)),
               VehicleID(),
-              SizedBox(height: 50*scale-(50/scale)),
+              SizedBox(height: 50 * scale - (50 / scale)),
               QRScanner(),
-              SizedBox(height: 50*scale-(50/scale)),
+              SizedBox(height: 50 * scale - (50 / scale)),
               ReviewData()
             ],
           ),
@@ -52,7 +52,7 @@ class _VehicleIDState extends State<VehicleID> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height/500;
+    double scale = MediaQuery.of(context).size.height / 500;
     return Column(
       children: <Widget>[
         Icon(
@@ -91,7 +91,7 @@ class _QRScanner extends State<QRScanner> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height/500;
+    double scale = MediaQuery.of(context).size.height / 500;
     return Column(
       children: <Widget>[
         IconButton(
@@ -127,7 +127,7 @@ class _ReviewData extends State<ReviewData> {
     try {
       currentLocation = await location.getLocation();
     } on PlatformException {
-      currentLocation =  null;
+      currentLocation = null;
     }
     var url =
         "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
@@ -153,7 +153,7 @@ class _ReviewData extends State<ReviewData> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height/500;
+    double scale = MediaQuery.of(context).size.height / 500;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -199,12 +199,12 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 30*scale-(30/scale)),
+      SizedBox(height: 30 * scale - (30 / scale)),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-              width: 70 * scale,
+              width: 120 * scale - (120 / scale),
               child: TextField(
                 controller: cvehicleid,
                 decoration: InputDecoration(hintText: "Vehicle ID"),
@@ -248,7 +248,7 @@ class _CameraPicker extends State<CameraPicker> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height/500;
+    double scale = MediaQuery.of(context).size.height / 500;
     return IconButton(
       iconSize: 15 * scale,
       icon: Icon(
