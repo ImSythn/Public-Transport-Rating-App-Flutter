@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.02/500;
+    double scale = MediaQuery.of(context).size.height*1.0125/500;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               VehicleID(),
               SizedBox(height: 15 * scale),
               QRScanner(),
-              SizedBox(height: 30 * scale),
+              SizedBox(height: 40 * scale),
               ReviewData()
             ],
           ),
@@ -52,7 +52,7 @@ class _VehicleIDState extends State<VehicleID> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.02/500;
+    double scale = MediaQuery.of(context).size.height*1.0125/500;
     return Column(
       children: <Widget>[
         Icon(
@@ -91,7 +91,7 @@ class _QRScanner extends State<QRScanner> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.02/500;
+    double scale = MediaQuery.of(context).size.height*1.0125/500;
     return Column(
       children: <Widget>[
         IconButton(
@@ -153,7 +153,7 @@ class _ReviewData extends State<ReviewData> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.02/500;
+    double scale = MediaQuery.of(context).size.height*1.0125/500;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +199,7 @@ class _ReviewData extends State<ReviewData> {
               })
         ],
       ),
-      SizedBox(height: 20 * scale),
+      SizedBox(height: 13 * scale),
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -248,7 +248,7 @@ class _CameraPicker extends State<CameraPicker> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.02/500;
+    double scale = MediaQuery.of(context).size.height*1.0125/500;
     return IconButton(
       iconSize: 15 * scale,
       icon: Icon(
