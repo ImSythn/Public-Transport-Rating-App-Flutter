@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.01/500;
+    double scale = MediaQuery.of(context).size.height*1.02/500;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -52,12 +52,12 @@ class _VehicleIDState extends State<VehicleID> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.01/500;
+    double scale = MediaQuery.of(context).size.height*1.02/500;
     return Column(
       children: <Widget>[
         Icon(
           Icons.train,
-          size: 150 * scale,
+          size: 140 * scale,
           color: Colors.lightBlue,
         ),
       ],
@@ -91,7 +91,7 @@ class _QRScanner extends State<QRScanner> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.01/500;
+    double scale = MediaQuery.of(context).size.height*1.02/500;
     return Column(
       children: <Widget>[
         IconButton(
@@ -153,16 +153,16 @@ class _ReviewData extends State<ReviewData> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.01/500;
+    double scale = MediaQuery.of(context).size.height*1.02/500;
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-              iconSize: 75 * scale,
+              iconSize: 60 * scale,
               icon: Icon(
                 Icons.mood_bad,
-                size: 75 * scale,
+                size: 60 * scale,
                 color: buttonColor[0],
               ),
               onPressed: () {
@@ -172,10 +172,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 75 * scale,
+              iconSize: 60 * scale,
               icon: Icon(
                 Icons.sentiment_neutral,
-                size: 75 * scale,
+                size: 60 * scale,
                 color: buttonColor[1],
               ),
               onPressed: () {
@@ -185,10 +185,10 @@ class _ReviewData extends State<ReviewData> {
                 });
               }),
           IconButton(
-              iconSize: 75 * scale,
+              iconSize: 60 * scale,
               icon: Icon(
                 Icons.mood,
-                size: 75 * scale,
+                size: 60 * scale,
                 color: buttonColor[2],
               ),
               onPressed: () {
@@ -248,7 +248,7 @@ class _CameraPicker extends State<CameraPicker> {
   @override
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height*1.01/500;
+    double scale = MediaQuery.of(context).size.height*1.02/500;
     return IconButton(
       iconSize: 15 * scale,
       icon: Icon(
