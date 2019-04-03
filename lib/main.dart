@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: 150 / devicePixelRatio),
               VehicleID(),
-              SizedBox(height: 150 / devicePixelRatio),
+              SizedBox(height: 75 / devicePixelRatio),
               QRScanner(),
               SizedBox(height: 150 / devicePixelRatio),
               ReviewData()
@@ -93,15 +93,15 @@ class _QRScanner extends State<QRScanner> {
     return Column(
       children: <Widget>[
         IconButton(
-          iconSize: 100,
-          icon: Icon(Icons.camera_alt),
+          iconSize: 200 / devicePixelRatio,
+          icon: Icon(Icons.center_focus_weak),
           onPressed: scanQR,
         ),
         SizedBox(
             height: 40 / devicePixelRatio,
             child: FittedBox(
                 child: Text(
-              'Scan your vehicle',
+              'Scan vehicle QR-code',
             )))
       ],
     );
@@ -250,10 +250,10 @@ class _CameraPicker extends State<CameraPicker> {
     queryData = MediaQuery.of(context);
     double devicePixelRatio = queryData.devicePixelRatio;
     return IconButton(
-      iconSize: 75 / devicePixelRatio,
+      iconSize: 60 / devicePixelRatio,
       icon: Icon(
         Icons.camera_alt,
-        size: 75 / devicePixelRatio,
+        size: 60 / devicePixelRatio,
       ),
       onPressed: picker,
     );
