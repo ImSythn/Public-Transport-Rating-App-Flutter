@@ -72,22 +72,22 @@ class QRScanner extends StatefulWidget {
 }
 
 class _QRScanner extends State<QRScanner> {
-  scanQR() async {
+  scanQR() async { // async because the QR scanning can happen at any moment
     try {
-      String qrResult = await BarcodeScanner.scan();
+      String qrResult = await BarcodeScanner.scan(); //wait for result from qr scanner
       setState(() {
-        if (isNumeric(qrResult)) {
-          cvehicleid.text = qrResult;
+        if (isNumeric(qrResult)) { // check if it's not some random QR code
+          cvehicleid.text = qrResult; //fills in the vehicle id section
         } else {
           Dialog dialogs = new Dialog();
-          dialogs.information(context, "Invalid QR code");
+          dialogs.information(context, "Invalid QR code"); // if it was a bad QR code it will pop up saying Invalid QR Code
         }
       });
-    } on PlatformException {
+    } on PlatformException { // exception if the QR read went into error for some reason
       setState(() {
         cvehicleid.text = '';
       });
-    } on FormatException {
+    } on FormatException { // exception if you back out of the QR scanner
       setState(() {
         cvehicleid.text = '';
       });
@@ -131,7 +131,7 @@ class _ReviewData extends State<ReviewData> {
 
   void addData() async {
     try {
-      currentLocation = await location.getLocation();
+      currentLocation = await location.getLocation(); // wait for current location
     } on PlatformException {
       currentLocation = null;
     }
@@ -252,10 +252,10 @@ class CameraPicker extends StatefulWidget {
 }
 
 class _CameraPicker extends State<CameraPicker> {
-  picker() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    if (img != null) {
-      reviewImage = base64Encode(img.readAsBytesSync());
+  picker() async { // async because it can happen at any moment
+    File img = await ImagePicker.pickImage(source: ImageSource.camera); //wait for the camera to deliver a picture, put it in a variable.
+    if (img != null) { // if you back out of the camera app we don't want something to be encoded
+      reviewImage = base64Encode(img.readAsBytesSync()); //create a string out of the image
     }
   }
 
@@ -263,28 +263,28 @@ class _CameraPicker extends State<CameraPicker> {
   Widget build(BuildContext context) {
     queryData = MediaQuery.of(context);
     double scale = MediaQuery.of(context).size.height / 500;
-    return IconButton(
+    return IconButton( // button to press on screen
       iconSize: 15 * scale,
       icon: Icon(
         Icons.camera_alt,
         size: 15 * scale,
       ),
-      onPressed: picker,
+      onPressed: picker, 
     );
   }
 }
 
 class Dialog {
   information(BuildContext context, String title) { //Making the class like this so we can use this code for multiple types of popups
-    return showDialog(
+    return showDialog( // sets it so whatever comes next will be above the current application
         context: context,
-        barrierDismissible: true, //
+        barrierDismissible: true, // Allows popup to be closed by clicking anywhere on the screen
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
+          return AlertDialog( //actual alert popup
+            title: Text(title), //What the alert says
             actions: <Widget>[
               FlatButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(context), //closes popup on press
                 child: Text("Ok"),
               )
             ],
