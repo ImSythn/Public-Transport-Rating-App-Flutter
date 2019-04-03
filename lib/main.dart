@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:validators/validators.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -73,15 +74,20 @@ class _QRScanner extends State<QRScanner> {
     try {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
-        cvehicleid.text = qrResult;
+        if (isNumeric(qrResult)) {
+          cvehicleid.text = qrResult;
+        } else {
+          Dialog dialogs = new Dialog();
+          dialogs.information(context, "Invalid QR code");
+        }
       });
     } on PlatformException {
       setState(() {
         cvehicleid.text = '';
       });
-    } on FormatException{
+    } on FormatException {
       setState(() {
-       cvehicleid.text = ''; 
+        cvehicleid.text = '';
       });
     }
   }
@@ -217,6 +223,8 @@ class _ReviewData extends State<ReviewData> {
               ),
               onPressed: () {
                 addData();
+                Dialog dialogs = new Dialog();
+                dialogs.information(context, "Thank you for your review!");
               })
         ],
       ),
@@ -257,5 +265,24 @@ class _CameraPicker extends State<CameraPicker> {
       ),
       onPressed: picker,
     );
+  }
+}
+
+class Dialog {
+  information(BuildContext context, String title) {
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text("Ok"),
+              )
+            ],
+          );
+        });
   }
 }
