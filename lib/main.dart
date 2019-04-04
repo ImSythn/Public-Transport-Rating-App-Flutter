@@ -31,7 +31,11 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SizedBox(height: 50 * scale - (50 / scale)),
-              VehicleID(),
+              Icon(
+                Icons.train,
+                size: 130 * scale,
+                color: Colors.lightBlue,
+              ),
               SizedBox(height: 50 * scale - (50 / scale)),
               QRScanner(),
               SizedBox(height: 50 * scale - (50 / scale)),
@@ -40,28 +44,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class VehicleID extends StatefulWidget {
-  @override
-  _VehicleIDState createState() => _VehicleIDState();
-}
-
-class _VehicleIDState extends State<VehicleID> {
-  @override
-  Widget build(BuildContext context) {
-    queryData = MediaQuery.of(context);
-    double scale = MediaQuery.of(context).size.height / 500;
-    return Column(
-      children: <Widget>[
-        Icon(
-          Icons.train,
-          size: 130 * scale,
-          color: Colors.lightBlue,
-        ),
-      ],
     );
   }
 }
@@ -127,28 +109,28 @@ class ReviewData extends StatefulWidget {
   State<StatefulWidget> createState() => _ReviewData();
 }
 
-TextEditingController cvehicleid = new TextEditingController(text: '');
+TextEditingController cvehicleid = new TextEditingController(text: ''); 
 
 class _ReviewData extends State<ReviewData> {
-  TextEditingController cmessage = new TextEditingController(text: '');
+  TextEditingController cmessage = new TextEditingController(text: ''); 
   int rating = 1;
-  Map<String,double> currentLocation = new Map();
+  Map<String, double> currentLocation = new Map();
   Location location = new Location();
   String error;
 
-  void addData() async {
+  void addData() async { // Creates a post for all the user review 
     try {
       currentLocation =
           await location.getLocation(); // wait for current location
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e) { // Checks for error codes if location can not be retrieved then sets currentlocation to null
       if (e.code == 'PERMISSION_DENIED') {
         error = 'Permission denied';
       }
       currentLocation = null;
     }
     var url =
-        "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
-    final response = await http.post(url, body: {
+        "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use
+    final response = await http.post(url, body: { // Creates a post with costum API that returns either an error or a success message 
       "message": cmessage.text,
       "rating": rating.toString(),
       "vehicle_id": cvehicleid.text,
@@ -156,18 +138,18 @@ class _ReviewData extends State<ReviewData> {
       "lng": currentLocation['longitude'].toString(),
       "lat": currentLocation['latitude'].toString()
     });
-    String status = json.decode(response.body);
+    String status = json.decode(response.body); 
     if (status == 'Error: Wrong vehicle ID') {
       Dialog dialogs = new Dialog();
       dialogs.information(context, status);
     } else if (status == 'Thank you for your review') {
       Dialog dialogs = new Dialog();
       dialogs.information(context, status);
-      emptyReview();
+      emptyReview(); 
     }
   }
 
-  void emptyReview() {
+  void emptyReview() { // Clears all post variables
     setState(() {
       cmessage.text = '';
       cvehicleid.text = '';
@@ -177,9 +159,9 @@ class _ReviewData extends State<ReviewData> {
     });
   }
 
-  List<Color> buttonColor = [Colors.black12, Colors.black, Colors.black12];
+  List<Color> buttonColor = [Colors.black12, Colors.black, Colors.black12]; // Keeps track of the rating buttons colours
 
-  void updateButtons() {
+  void updateButtons() { // Updates the button clours so they equal the given rating 
     buttonColor[0] = Colors.black12;
     buttonColor[1] = Colors.black12;
     buttonColor[2] = Colors.black12;
@@ -242,9 +224,9 @@ class _ReviewData extends State<ReviewData> {
           Container(
               width: 120 * scale - (120 / scale),
               child: TextField(
-                controller: cvehicleid,
+                controller: cvehicleid, // Controllers changes live and doesn't need a set state to opperate 
                 decoration: InputDecoration(hintText: "Vehicle ID"),
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.number, // Makes it so you can't input letts and get a number keyboard
               )),
           CameraPicker(),
           IconButton(
@@ -259,7 +241,7 @@ class _ReviewData extends State<ReviewData> {
         ],
       ),
       TextField(
-        controller: cmessage,
+        controller: cmessage, // Controllers changes live and doesn't need a set state to opperate. 
         decoration: InputDecoration(hintText: "Type a message"),
       ),
     ]);
