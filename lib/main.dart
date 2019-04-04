@@ -132,27 +132,39 @@ TextEditingController cvehicleid = new TextEditingController(text: '');
 class _ReviewData extends State<ReviewData> {
   TextEditingController cmessage = new TextEditingController(text: '');
   int rating = 1;
-  Map<String, double> currentLocation = <String, double>{};
+  Map<String,double> currentLocation = new Map();
   Location location = new Location();
+  String error;
 
   void addData() async {
     try {
       currentLocation =
           await location.getLocation(); // wait for current location
-    } on PlatformException {
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      }
       currentLocation = null;
     }
     var url =
         "http://10.0.2.2/SE7/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use.
-    http.post(url, body: {
+    final response = await http.post(url, body: {
       "message": cmessage.text,
       "rating": rating.toString(),
       "vehicle_id": cvehicleid.text,
       "img_path": reviewImage,
-      "lng": currentLocation["longitude"].toString(),
-      "lat": currentLocation["latitude"].toString()
+      "lng": currentLocation['longitude'].toString(),
+      "lat": currentLocation['latitude'].toString()
     });
-    emptyReview();
+    String status = json.decode(response.body);
+    if (status == 'Error: Wrong vehicle ID') {
+      Dialog dialogs = new Dialog();
+      dialogs.information(context, status);
+    } else if (status == 'Thank you for your review') {
+      Dialog dialogs = new Dialog();
+      dialogs.information(context, status);
+      emptyReview();
+    }
   }
 
   void emptyReview() {
@@ -243,8 +255,6 @@ class _ReviewData extends State<ReviewData> {
               ),
               onPressed: () {
                 addData();
-                Dialog dialogs = new Dialog();
-                dialogs.information(context, "Thank you for your review!");
               })
         ],
       ),
