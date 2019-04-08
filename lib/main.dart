@@ -134,7 +134,7 @@ class _ReviewData extends State<ReviewData> {
       currentLocation = null;
     }
     var url =
-        "http://10.0.2.2/SE07_Dashboard/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use
+        "http://10.0.2.2/SE07-Dashboard/public/review"; //10.0.2.2    Special alias to your host loopback interface for android use
     final response = await http.post(url, body: { // Creates a post with costum API that returns either an error or a success message 
       "message": cmessage.text,
       "rating": rating.toString(),
